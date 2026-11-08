@@ -14,7 +14,7 @@ class FormView extends View {
       .join('');
     return `
       <form>
-        <input name="title" placeholder="Agenda title" value="${this._escape(values.title)}">
+        <input name="title" placeholder="Agenda title" autocomplete="off" value="${this._escape(values.title)}">
         <input name="date" type="date" value="${this._escape(values.date)}">
         <select name="priority">${options}</select>
         ${error ? `<p class="error">${this._escape(error)}</p>` : ''}
