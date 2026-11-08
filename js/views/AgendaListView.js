@@ -23,6 +23,8 @@ class AgendaListView extends View {
       </li>`;
   }
 
+// Event delegation: the listener sits on the parent list, so it keeps
+// working after render() replaces the child <li> elements.
   _addHandler(action, handler, event = 'click') {
     this._parent.addEventListener(event, e => {
       const el = e.target.closest(`[data-action="${action}"]`);
