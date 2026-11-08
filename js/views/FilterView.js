@@ -7,7 +7,7 @@ class FilterView extends View {
 
   _generateMarkup() {
     return ['all', 'pending', 'done']
-      .map(f => `<button data-filter="${f}" class="${this._data === f ? 'active' : ''}">${f}</button>`)
+      .map(f => `<button data-filter="${f}" aria-pressed="${this._data === f}" class="${this._data === f ? 'active' : ''}">${f}</button>`)
       .join('');
   }
 
