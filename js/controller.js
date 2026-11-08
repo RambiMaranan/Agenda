@@ -17,6 +17,7 @@ const refresh = () => {
   filterView.render(model.state.filter);
 };
 
+// Flow: validate, then add or update in the model, then reset the form and re-render
 const controlSubmit = data => {
   const error = model.validate(data);
   if (error) return renderForm(data, error);
