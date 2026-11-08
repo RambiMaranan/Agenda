@@ -13,7 +13,7 @@ class AgendaListView extends View {
   _generateItem({ id, title, date, priority, done, overdue }) {
     return `
       <li class="${priority} ${done ? 'done' : ''} ${overdue ? 'overdue' : ''}">
-        <input type="checkbox" data-action="toggle" data-id="${id}" ${done ? 'checked' : ''}>
+        <input type="checkbox" data-action="toggle" data-id="${id}" aria-label="Mark ${this._escape(title)} as done" ${done ? 'checked' : ''}>
         <div class="info">
           <div class="title">${this._escape(title)}</div>
           <div class="meta">${date} · ${priority}${overdue ? ' · OVERDUE' : ''}</div>
