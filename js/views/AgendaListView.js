@@ -6,7 +6,7 @@ class AgendaListView extends View {
   }
 
   _generateMarkup() {
-    if (!this._data.length) return '<li class="empty">No agenda items here yet.</li>';
+    if (!this._data.length) return '<li class="empty">No agenda items here yet. Add one above.</li>';
     return this._data.map(item => this._generateItem(item)).join('');
   }
 
@@ -23,8 +23,8 @@ class AgendaListView extends View {
       </li>`;
   }
 
-// Event delegation: the listener sits on the parent list, so it keeps
-// working after render() replaces the child <li> elements.
+  // Event delegation: the listener sits on the parent list, so it keeps
+  // working after render() replaces the child <li> elements.
   _addHandler(action, handler, event = 'click') {
     this._parent.addEventListener(event, e => {
       const el = e.target.closest(`[data-action="${action}"]`);
