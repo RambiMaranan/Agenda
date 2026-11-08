@@ -7,6 +7,8 @@ export const state = {
 
 const today = () => new Date().toLocaleDateString('en-CA');
 
+const isOverdue = i => !i.done && i.date < today();
+
 const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(state.items));
 
 export const loadState = () => {
@@ -55,13 +57,13 @@ export const setFilter = filter => {
 export const getVisibleItems = () =>
   state.items
     .filter(i => state.filter === 'all' || (state.filter === 'done') === i.done)
-    .map(i => ({ ...i, overdue: !i.done && i.date < today() }))
+    .map(i => ({ ...i, overdue: isOverdue(i) }))
     .sort((a, b) => a.date.localeCompare(b.date));
 
 export const getStats = () => {
   const total = state.items.length;
   const done = state.items.filter(i => i.done).length;
-  const overdue = state.items.filter(i => !i.done && i.date < today()).length;
+  const overdue = state.items.filter(isOverdue).length;
   return {
     total,
     done,
