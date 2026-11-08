@@ -1,40 +1,22 @@
 import View from './View.js';
 
-class AgendaListView extends View {
+class FilterView extends View {
   constructor() {
-    super('.agenda-list');
+    super('.filters');
   }
 
   _generateMarkup() {
-    if (!this._data.length) return '<li class="empty">No agenda items here yet. Add one above.</li>';
-    return this._data.map(item => this._generateItem(item)).join('');
+    return ['all', 'pending', 'done']
+      .map(f => `<button data-filter="${f}" aria-pressed="${this._data === f}" class="${this._data === f ? 'active' : ''}">${f}</button>`)
+      .join('');
   }
 
-  _generateItem({ id, title, date, priority, done, overdue }) {
-    return `
-      <li class="${priority} ${done ? 'done' : ''} ${overdue ? 'overdue' : ''}">
-        <input type="checkbox" data-action="toggle" data-id="${id}" aria-label="Mark ${this._escape(title)} as done" ${done ? 'checked' : ''}>
-        <div class="info">
-          <div class="title">${this._escape(title)}</div>
-          <div class="meta">${date} · ${priority}${overdue ? ' · OVERDUE' : ''}</div>
-        </div>
-        <button data-action="edit" data-id="${id}">Edit</button>
-        <button data-action="delete" data-id="${id}">Delete</button>
-      </li>`;
-  }
-
-  // Event delegation: the listener sits on the parent list, so it keeps
-  // working after render() replaces the child <li> elements.
-  _addHandler(action, handler, event = 'click') {
-    this._parent.addEventListener(event, e => {
-      const el = e.target.closest(`[data-action="${action}"]`);
-      if (el) handler(el.dataset.id);
+  addHandlerFilter(handler) {
+    this._parent.addEventListener('click', e => {
+      const btn = e.target.closest('[data-filter]');
+      if (btn) handler(btn.dataset.filter);
     });
   }
-
-  addHandlerToggle(handler) { this._addHandler('toggle', handler, 'change'); }
-  addHandlerEdit(handler) { this._addHandler('edit', handler); }
-  addHandlerDelete(handler) { this._addHandler('delete', handler); }
 }
 
-export default new AgendaListView();
+export default new FilterView();
