@@ -1,4 +1,4 @@
-const CACHE = 'agenda-tracker-v1';
+const CACHE = 'agenda-tracker-v2';
 const FILES = [
   './', './index.html', './css/style.css', './manifest.webmanifest',
   './js/model.js', './js/controller.js', './js/register-sw.js',
