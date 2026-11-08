@@ -15,7 +15,7 @@ class StatsView extends View {
         <span>Overdue: <b>${overdue}</b></span>
         <span>Progress: <b>${percent}%</b></span>
       </div>
-      <div class="bar"><span style="width:${percent}%"></span></div>`;
+      <div class="bar" role="progressbar" aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100"><span style="width:${percent}%"></span></div>`;
   }
 }
 
