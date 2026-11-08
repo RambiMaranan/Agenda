@@ -60,6 +60,7 @@ export const getVisibleItems = () =>
     .map(i => ({ ...i, overdue: isOverdue(i) }))
     .sort((a, b) => a.date.localeCompare(b.date));
 
+// Returns { total, done, pending, overdue, percent } for the stats panel
 export const getStats = () => {
   const total = state.items.length;
   const done = state.items.filter(i => i.done).length;
