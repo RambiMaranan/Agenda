@@ -5,6 +5,8 @@ class FormView extends View {
     super('.agenda-form');
   }
 
+  // this._data = { values, editingId, error }
+  // values: current field values, editingId: id being edited (or null), error: validation message
   _generateMarkup() {
     const { values, editingId, error } = this._data;
     const options = ['high', 'medium', 'low']
